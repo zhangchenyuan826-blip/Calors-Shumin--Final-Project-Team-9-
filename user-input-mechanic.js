@@ -14,7 +14,7 @@ class UserInputMechanic {
     displayModeText() {
         noStroke();
         fill(255, 230);
-        textSize(16);
+        textSize(14);
         text(
             "Mode: " + this.mode +" | Move mouse for ripples, click to plant lilies, press 1/2/3",
             20,
