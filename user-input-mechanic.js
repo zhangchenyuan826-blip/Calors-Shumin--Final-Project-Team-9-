@@ -13,11 +13,20 @@ class UserInputMechanic {
 
     addRipple(x, y, strongRipple) {
         let ripple = new Ripple(x, y, strongRipple, this.mode);
-        this.ripples.push(ripple);  
+        this.ripples.push(ripple);
     }
+    addLily(x, y) {
+        let lily = new Lily(x, y);
+        this.lilies.push(lily);
+    }
+
     update() {
         for (let ripple of this.ripples) {
             ripple.update();
+        }
+        
+        for (let lily of this.lilies) {
+            lily.update();
         }
         
         this.ripples = this.ripples.filter(function (ripple) {
@@ -29,6 +38,10 @@ class UserInputMechanic {
             ripple.display();
         }
         
+        for (let lily of this.lilies) {
+            lily.display();
+        }
+
         this.displayModeText();
     }
     displayModeText() {
@@ -88,5 +101,43 @@ class Ripple {
 
     isVisible() {
         return this.alpha > 0;
+    }
+}
+
+//Lily objects are planted by mouse clicks and grow smoothly with lerp().
+class Lily {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 0;
+        this.targetSize = random(35, 65);
+        this.angle = random(TWO_PI);
+        this.petalColour = color(random(230, 255), random(160, 210), random(210, 245));
+    }
+    
+    update() {
+        this.size = lerp(this.size, this.targetSize, 0.04);
+        this.angle += 0.003;
+    }
+
+    display() {
+        push();
+        translate(this.x, this.y);
+        rotate(this.angle);
+
+        noStroke();
+
+        fill(45, 95, 55, 220);
+        ellipse(0, 0, this.size * 1.3, this.size * 0.75);
+
+        fill(this.petalColour);
+        for (let i = 0; i < 6; i++) {
+            ellipse(0, -this.size * 0.18, this.size * 0.45, this.size * 0.16);
+            rotate(TWO_PI / 6);
+        }
+        fill(245, 220, 90);
+        ellipse(0, 0, this.size * 0.16, this.size * 0.16);
+        
+        pop();
     }
 }

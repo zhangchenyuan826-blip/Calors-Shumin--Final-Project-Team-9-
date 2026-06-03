@@ -66,3 +66,7 @@ function windowResized() {
 function mouseMoved() {
   userInputMechanic.addRipple(mouseX, mouseY, false);
 }
+function mousePressed() {
+  userInputMechanic.addRipple(mouseX, mouseY, true);
+  userInputMechanic.addLily(mouseX, mouseY);
+}
