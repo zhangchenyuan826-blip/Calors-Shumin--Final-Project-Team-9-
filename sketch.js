@@ -21,7 +21,9 @@ function draw() {
 
   drawImageCover (waterLiliesImage);
   drawPondColourOverlay();
-  userInputMechanic.displayModeText();
+
+  userInputMechanic.update();
+  userInputMechanic.display();
 }
 function drawImageCover(inputImage) {
  let imageRatio = inputImage.width / inputImage.height;
@@ -51,7 +53,7 @@ function drawPondColourOverlay() {
   rect(0, 0, width, height);
 
   fill(120, 170, 160, 35);
-  ellipse(width * 0.25, height * 0.35, width *0.45, height * 0.18);
+  ellipse(width * 0.25, height * 0.35, width * 0.45, height * 0.18);
 
   fill(80, 110, 150, 35);
   ellipse(width * 0.75, height * 0.65, width * 0.55, height * 0.2);
@@ -59,4 +61,8 @@ function drawPondColourOverlay() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function mouseMoved() {
+  userInputMechanic.addRipple(mouseX, mouseY, false);
 }
