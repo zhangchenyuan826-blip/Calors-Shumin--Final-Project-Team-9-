@@ -48,14 +48,36 @@ function drawImageCover(inputImage) {
 
 function drawPondColourOverlay() {
   noStroke();
-  
-  fill(20, 50, 70, 35);
-  rect(0, 0, width, height);
 
-  fill(120, 170, 160, 35);
+if (userInputMechanic.mode === "calm") {
+// Calm mode: soft blue-green daylight.
+  fill(20, 70, 80, 20);
+} else if (userInputMechanic.mode === "windy") {
+// Windy mode: stronger cold blue.
+  fill(0, 75, 150, 85);
+} else if (userInputMechanic.mode === "glowing") {
+  fill(120, 30, 150, 95);
+}
+rect(0, 0, width, height);
+
+if (userInputMechanic.mode === "calm") {
+  fill(140, 190, 160, 30);
+}else if (userInputMechanic.mode === "windy") {
+  fill(180, 230, 255, 45);
+}else if (userInputMechanic.mode === "glowing") {
+  fill(255, 170, 230, 45);
+  }
+
   ellipse(width * 0.25, height * 0.35, width * 0.45, height * 0.18);
 
-  fill(80, 110, 150, 35);
+  if (userInputMechanic.mode === "calm") {
+    fill(80, 120, 150, 25);
+  } else if (userInputMechanic.mode === "windy") {
+    fill(40, 160, 255, 45);
+  } else if (userInputMechanic.mode === "glowing") {
+    fill(200, 120, 255, 50);
+  }
+ 
   ellipse(width * 0.75, height * 0.65, width * 0.55, height * 0.2);
 } 
 
