@@ -11,15 +11,19 @@ class UserInputMechanic {
     this.mode = "calm";
     }
 
+// Create a ripple at the current mouse position.
     addRipple(x, y, strongRipple) {
         let ripple = new Ripple(x, y, strongRipple, this.mode);
         this.ripples.push(ripple);
     }
+
+// Plant a new lily at the clicked position.
     addLily(x, y) {
         let lily = new Lily(x, y);
         this.lilies.push(lily);
     }
 
+// Keyboard input changes the visual mode of future ripples.
     changeMode(inputKey) {
         if (inputKey === '1') {
             this.mode = "calm";
@@ -30,6 +34,7 @@ class UserInputMechanic {
         }
     }
 
+// Update all animated objects every frame.
     update() {
         for (let ripple of this.ripples) {
             ripple.update();
@@ -43,6 +48,8 @@ class UserInputMechanic {
             return ripple.isVisible();
         });
     }
+
+// Draw all ripples and lilies on the canvas.
     display() {
         for (let ripple of this.ripples) {
             ripple.display();
