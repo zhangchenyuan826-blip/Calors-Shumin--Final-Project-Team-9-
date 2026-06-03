@@ -70,3 +70,6 @@ function mousePressed() {
   userInputMechanic.addRipple(mouseX, mouseY, true);
   userInputMechanic.addLily(mouseX, mouseY);
 }
+function keyPressed() {
+  userInputMechanic.changeMode(key);
+}

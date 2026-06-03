@@ -20,6 +20,16 @@ class UserInputMechanic {
         this.lilies.push(lily);
     }
 
+    changeMode(inputKey) {
+        if (inputKey === '1') {
+            this.mode = "calm";
+        } else if (inputKey === '2') {
+            this.mode = "windy";
+        } else if (inputKey === '3') {
+            this.mode = "glowing";
+        }
+    }
+
     update() {
         for (let ripple of this.ripples) {
             ripple.update();
