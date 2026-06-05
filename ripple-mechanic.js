@@ -2,7 +2,7 @@ let img;
 let ripples = [];
 
 function preload() {
-  img = loadImage("assets/monet.jpg");
+  img = loadImage("assets/water-lilies.jpg");
 }
 
 function setup() {
