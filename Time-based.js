@@ -33,7 +33,7 @@ const brightness = {
 };
 
 function preloadTimeBased() {
-    img = loadImage('assets/water-lilies.jpg');
+    img = loadImage("assets/water-lilies.jpg");
 }
 
 function setupTimeBased() {
