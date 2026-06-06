@@ -9,22 +9,30 @@ let waterLiliesImage;
 
 function preload() {
   waterLiliesImage = loadImage("assets/water-lilies.jpg"); // Ensure this image is in the project folder
+  preloadTimeBased(); 
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   userInputMechanic = new UserInputMechanic();
+  setupTimeBased();
 }
 
 function draw() {
   background(32, 58, 72);
 
-  drawImageCover (waterLiliesImage);
+  updateTimeCycle();
+
+  let timeOverlay = getCurrentOverlay();
+  let timeBrightness = getCurrentBrightness();
+  drawImageWithEffect(timeOverlay, timeBrightness);
+
   drawPondColourOverlay();
 
   userInputMechanic.update();
   userInputMechanic.display();
 }
+
 function drawImageCover(inputImage) {
  let imageRatio = inputImage.width / inputImage.height;
  let canvasRatio = width / height;
@@ -83,6 +91,7 @@ if (userInputMechanic.mode === "calm") {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  calculateFit();
 }
 
 function mouseMoved() {

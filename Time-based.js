@@ -19,8 +19,8 @@ let stateProgress = 0;
 let cycleDuration = 600;
 
 const overlays = {
-    morning: [232, 243, 255,80],
-    day: [255, 240, 219, 0],
+    morning: [250, 233, 222, 80],
+    day: [250, 241, 222, 0],
     sunset: [226, 178, 89, 100],
     night: [97, 97, 127, 180]
 };
