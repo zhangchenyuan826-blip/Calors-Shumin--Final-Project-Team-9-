@@ -1,5 +1,5 @@
 // Main sketch setup for Living Water Lilies.
-// Student: Chenyuan Zhang
+// Student: Chenyuan Zhang；Manyu Lin; Rui Li.
 // This section loads the Water Lilies image and connects it with the User Input Mechanic. 
 // It uses preload(), loadImage(), image(), windowWidth, windowHeight, and WindowResized()
 // based on p5.js techniques from the IDEA9103 Week 7 and Week 9 tutorials.
@@ -10,12 +10,14 @@ let waterLiliesImage;
 function preload() {
   waterLiliesImage = loadImage("assets/water-lilies.jpg"); // Ensure this image is in the project folder
   preloadTimeBased(); 
+  preloadAudioMechanic();
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   userInputMechanic = new UserInputMechanic();
   setupTimeBased();
+  setupAudioMechanic();
 }
 
 function draw() {
@@ -31,6 +33,8 @@ function draw() {
 
   userInputMechanic.update();
   userInputMechanic.display();
+
+  drawAudioMechanic();
 }
 
 function drawImageCover(inputImage) {
