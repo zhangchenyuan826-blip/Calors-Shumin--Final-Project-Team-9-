@@ -1,4 +1,12 @@
-let img, song, amp, fft, playButton;
+// Audio Mechanic: Audio-Reactive Water Lilies
+// Student Name: Rui Li
+// This file contains the audio-reactive visual system for the Living Water Lilies Project.
+// It uses p5.js sound analysis including p5.Amplitude(), p5.FFT(),
+// loadSound(), and user interaction to create responsive ripples and particles
+// based on real-time audio volume and frequency data.
+// based on techniques from the IDEA9103 Week 7, Week 8, Week 10, and Week 12 tutorials.
+
+let song, amp, fft, playButton;
 let particles = [];
 let ripples = [];
 
@@ -10,13 +18,12 @@ let lilyPoints = [
   { x: 700, y: 500 }
 ];
 
-function preload() {
-  img = loadImage("assets/water-lilies.jpg");
+// Audio Mechanic Functions
+function preloadAudioMechanic() {
   song = loadSound("assets/music.mp3");
 }
 
-function setup() {
-  createCanvas(800, 600);
+function setupAudioMechanic() {
   amp = new p5.Amplitude();
   fft = new p5.FFT();
 
@@ -25,10 +32,7 @@ function setup() {
   playButton.mousePressed(toggleSound);
 }
 
-function draw() {
-  blendMode(BLEND);
-  image(img, 0, 0, width, height);
-
+function drawAudioMechanic() {
   let level = amp.getLevel();
 
   fft.analyze();
@@ -56,6 +60,8 @@ function toggleSound() {
   }
 }
 
+
+// Effects
 function createEffect(level, bass) {
   if (level > 0.012 && frameCount % 4 === 0) {
     let origin = random(lilyPoints);
