@@ -1,142 +1,151 @@
-let img;
-
+let img, song, amp, fft, playButton;
+let particles = [];
 let ripples = [];
-let lilyPads = [];
 
-let rippleNoise = 0;
+let lilyPoints = [
+  { x: 170, y: 300 },
+  { x: 260, y: 100 },
+  { x: 320, y: 470 },
+  { x: 620, y: 300 },
+  { x: 700, y: 500 }
+];
 
 function preload() {
   img = loadImage("assets/water-lilies.jpg");
+  song = loadSound("assets/music.mp3");
 }
 
 function setup() {
   createCanvas(800, 600);
+  amp = new p5.Amplitude();
+  fft = new p5.FFT();
 
-  // create lily pads
-  for (let i = 0; i < 20; i++) {
-    lilyPads.push({
-      x: random(width),
-      y: random(height),
-
-      noiseX: random(1000),
-      noiseY: random(2000),
-
-      size: random(20, 50),
-
-      speed: random(0.005, 0.02)
-    });
-  }
+  playButton = createButton("Play / Pause");
+  playButton.position(20, 20);
+  playButton.mousePressed(toggleSound);
 }
 
 function draw() {
-
+  blendMode(BLEND);
   image(img, 0, 0, width, height);
 
-  drawHighlights();
+  let level = amp.getLevel();
 
-  createNoiseRipples();
+  fft.analyze();
+  let bass = fft.getEnergy("bass");
 
+  createEffect(level, bass);
   drawRipples();
+  drawParticles();
 
-  drawLilyPads();
-}
-
-function createNoiseRipples() {
-
-  if (frameCount % 20 === 0) {
-
-    let x = noise(rippleNoise) * width;
-    let y = noise(rippleNoise + 1000) * height;
-
-    rippleNoise += 0.05;
-
-    ripples.push({
-      x: x,
-      y: y,
-
-      r: random(8, 18),
-
-      alpha: random(120, 220),
-
-      speed: random(2, 5)
-    });
+  if (!song.isPlaying()) {
+    fill(255);
+    textSize(22);
+    textAlign(CENTER, CENTER);
+    text("Click Play / Pause", width / 2, height / 2);
   }
 }
 
-function drawRipples() {
+function toggleSound() {
+  userStartAudio();
 
-  for (let i = ripples.length - 1; i >= 0; i--) {
+  if (song.isPlaying()) {
+    song.pause();
+  } else {
+    song.loop();
+  }
+}
 
-    let p = ripples[i];
+function createEffect(level, bass) {
+  if (level > 0.012 && frameCount % 4 === 0) {
+    let origin = random(lilyPoints);
 
-    noFill();
+    let palette = [
+      color(120, 190, 255),
+      color(210, 140, 255),
+      color(255, 150, 210),
+      color(255, 210, 120)
+    ];
 
-    stroke(255, 255, 255, p.alpha);
-    strokeWeight(2);
+    for (let i = 0; i < 3; i++) {
+      let angle = random(TWO_PI);
+      let speed = random(0.8, 2.2);
 
-    ellipse(p.x, p.y, p.r);
+      particles.push({
+        x: origin.x + random(-55, 55),
+        y: origin.y + random(-45, 45),
+        vx: cos(angle) * speed,
+        vy: sin(angle) * speed,
+        size: random(4, 10),
+        alpha: 240,
+        glow: random(25, 45),
+        c: random(palette)
+      });
+    }
 
-    stroke(180, 220, 255, p.alpha * 0.5);
-    ellipse(p.x, p.y, p.r * 1.5);
-
-    p.r += p.speed;
-
-    p.alpha -= 3;
-
-    if (p.alpha <= 0) {
-      ripples.splice(i, 1);
+    if (frameCount % 16 === 0) {
+      ripples.push({
+        x: origin.x,
+        y: origin.y,
+        r: 35,
+        alpha: 120,
+        speed: map(bass, 0, 255, 1.2, 3)
+      });
     }
   }
 }
 
-function drawLilyPads() {
-
-  for (let pad of lilyPads) {
-
-    pad.x += map(noise(pad.noiseX), 0, 1, -0.8, 0.8);
-    pad.y += map(noise(pad.noiseY), 0, 1, -0.8, 0.8);
-
-    pad.noiseX += pad.speed;
-    pad.noiseY += pad.speed;
-
-    noStroke();
-
-    fill(130, 190, 120, 120);
-
-    ellipse(
-      pad.x,
-      pad.y,
-      pad.size,
-      pad.size * 0.6
-    );
-
-    fill(220, 180, 220, 100);
-
-    ellipse(
-      pad.x,
-      pad.y,
-      pad.size * 0.3,
-      pad.size * 0.2
-    );
-  }
-}
-
-function drawHighlights() {
-
+function drawParticles() {
+  blendMode(SCREEN);
   noStroke();
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
 
-    let x =
-      noise(i * 0.1, frameCount * 0.005)
-      * width;
+    fill(red(p.c), green(p.c), blue(p.c), p.alpha * 0.65);
+    ellipse(p.x, p.y, p.glow);
 
-    let y =
-      noise(i * 0.1 + 100, frameCount * 0.005)
-      * height;
+    fill(red(p.c), green(p.c), blue(p.c), p.alpha);
+    ellipse(p.x, p.y, p.size);
 
-    fill(255, 255, 255, 20);
+    p.x += p.vx;
+    p.y += p.vy;
 
-    ellipse(x, y, 4, 2);
+    p.vx *= 0.98;
+    p.vy *= 0.98;
+
+    p.alpha -= 0.8;
+
+    if (p.alpha <= 0) {
+      particles.splice(i, 1);
+    }
   }
+
+  blendMode(BLEND);
+}
+
+function drawRipples() {
+  blendMode(SCREEN);
+  noFill();
+
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    let r = ripples[i];
+
+    stroke(255, 190, 230, r.alpha);
+    strokeWeight(1.2);
+    ellipse(r.x, r.y, r.r);
+
+    stroke(140, 210, 255, r.alpha * 0.8);
+    strokeWeight(0.9);
+    ellipse(r.x, r.y, r.r * 1.6);
+
+    r.r += r.speed;
+    r.alpha -= 0.8;
+
+    if (r.alpha <= 0) {
+      ripples.splice(i, 1);
+    }
+  }
+
+  blendMode(BLEND);
 }
