@@ -1,4 +1,4 @@
-#### Interactive Water Lilies
+### Interactive Water Lilies
 ### Inspiration
 Our project is inspired by Claude Monet's Water Lilies series. Monet's paintings focus on light, reflections, atmosphere, and the changing appearance of nature. Rather than creating a static reproduction of the artwork, our team reinterpreted the pond as an interactive digital environment that responds to users, time, and sound.
 The goal of the project is to transform Monet's peaceful water garden into a living experience where visitors can influence the pond through interaction while still preserving the calm and reflective qualities of the original artwork.
