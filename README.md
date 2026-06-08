@@ -1,3 +1,29 @@
+#### Interactive Water Lilies
+### Inspiration
+Our project is inspired by Claude Monet's Water Lilies series. Monet's paintings focus on light, reflections, atmosphere, and the changing appearance of nature. Rather than creating a static reproduction of the artwork, our team reinterpreted the pond as an interactive digital environment that responds to users, time, and sound.
+The goal of the project is to transform Monet's peaceful water garden into a living experience where visitors can influence the pond through interaction while still preserving the calm and reflective qualities of the original artwork.
+Techniques
+This project was developed using p5.js and combines multiple interactive systems to create a dynamic environment.
+Key techniques include:
+preload()
+loadImage()
+loadSound()
+mouseMoved()
+mousePressed()
+keyPressed()
+lerp()
+lerpColor()
+p5.Amplitude()
+p5.FFT()
+Arrays
+Classes
+Particle Systems
+Animation Loops (draw())
+Conditional Statements (if/else)
+Timers and frameCount
+These techniques allow the pond to respond to user input, audio, and the passage of time.
+
+### Mechanic Ownership
 ### Chenyuan Zhang-User Input Mechanic:Interactive ripple Garden
 
 I was responsible for the user input mechanic. My part lets the viewer interact with the pond using the mouse and keyboard. When the mouse moves across the canvas, small ripples appear on the water. When the mouse is clicked, a stronger ripple appears and a new water lily is added at that position.
@@ -40,4 +66,24 @@ ChatGPT was used throughout this project as a learning and development support t
 The sound-reactive mechanic, time-based mechanic, and user-input mechanic were designed, implemented, tested, and refined by the team members. AI-generated code and suggestions were adapted and modified to fit the specific requirements of the project. All final design decisions, coding integration, and evaluation were completed by the team.
 
 AI contributed to the development process by providing technical guidance and feedback, while the final creative work and project outcome remained the responsibility of the authors.
+
+### External References
+Claude Monet. Water Lilies Series.
+p5.js Reference:
+https://p5js.org/reference/
+p5.js Sound Library:
+https://p5js.org/reference/#/libraries/p5.sound
+OpenAI ChatGPT:
+https://chatgpt.com/
+
+### Interaction Instructions
+Click the Play / Pause button to start or stop the music.
+Move the mouse across the canvas to generate small water ripples.
+Click anywhere on the pond to create a larger ripple and add a new water lily.
+Press 1 to activate Calm Mode.
+Press 2 to activate Windy Mode.
+Press 3 to activate Glowing Mode.
+Observe how the pond changes throughout the day-night cycle.
+Listen to the music and watch how sound affects ripple strength, particles, and water movement.
+
 
