@@ -24,7 +24,7 @@ Timers and frameCount
 These techniques allow the pond to respond to user input, audio, and the passage of time.
 
 ### Mechanic Ownership
-### Chenyuan Zhang-User Input Mechanic:Interactive ripple Garden
+### Chenyuan Zhang-User Input Mechanic: Interactive ripple Garden
 
 I was responsible for the user input mechanic. My part lets the viewer interact with the pond using the mouse and keyboard. When the mouse moves across the canvas, small ripples appear on the water. When the mouse is clicked, a stronger ripple appears and a new water lily is added at that position.
 
@@ -35,7 +35,7 @@ I also added keyboard controls. Pressing '1' sets the scene to clam mode, pressi
 For this mechanic, I used p5.js techniques from the tutorials including 'mouseMoved()', 'mousePressed()', 'keyPressed()', arrarys, classes, 'lerp()', 'preload()', 'loadImage()'， and 'windowResized()'.
 
 
-### Manyu Lin-Time-Based Mechanic:Day/Nigh Pond
+### Manyu Lin-Time-Based Mechanic: Day/Nigh Pond
 
 I was responsible for the time-based mechanic. My part allows the pond environment to change automatically over time. The scene gradually moves through four different states: morning, daytime, sunset, and night. Each state has its own colour palette, brightness, and atmosphere, helping the pond feel more natural and alive.
 
